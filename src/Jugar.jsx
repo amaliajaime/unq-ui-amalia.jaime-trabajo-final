@@ -5,7 +5,7 @@ const Jugar = (props) => {
     return(
         <div>
             <h1>Un Jugador</h1>
-            <a>Hola</a>
+            <a>Hola {props.user} </a>
         </div>
     )
 }
