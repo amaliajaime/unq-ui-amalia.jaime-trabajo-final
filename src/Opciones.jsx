@@ -1,32 +1,67 @@
 import React, { useState } from 'react';
+import Opcion from './Opcion.jsx'
 
-const Opciones = (props) => {
-    const piedra = {vence:['lagarto', 'tijera']}
-    const papel =  {vence: ['piedra', 'spock']}
-    const tijera =  {vence:['papel', 'lagarto']}
-    const lagarto =  {vence:['spock', 'papel']}
-    const spock =  {vence:['piedra', 'tijera']}
+const Opciones = () => {
 
-    const [opciones, setOpciones] = 
-    useState ([piedra, papel, tijera, lagarto, spock])
+    const jugador1 = localStorage.getItem('jugador1');
+    const nombre = JSON.parse(jugador1).nombre
+
+    const [opcionJugador, setOpcionJugador] = useState(''); 
+    const [opcionJugador2, setOpcionJugador2] = useState('');
+    const [ganador, setGanador] = useState('');
+
+    const opciones = [
+        {eleccion: 'piedra', vence:['lagarto', 'tijera'], imagen:'/piedra.png'},
+        {eleccion: 'papel', vence: ['piedra', 'spock'], imagen:'/papel.jpg'},
+        {eleccion: 'tijera', vence: ['papel', 'lagarto'], imagen:'/tijera.jpg'},
+        {eleccion: 'lagarto', vence: ['spock', 'papel'], imagen:'/lagarto.jpg'},
+        {eleccion: 'spock', vence: ['piedra', 'tijera'], imagen:'/spock.jpg'}
+    ];
+
+    const handleClickJugador = (eleccion) => {
+        setGanador('')
+        console.log('eleccion jugador1', eleccion)
+        setOpcionJugador(eleccion)
+        console.log('jugador1', opcionJugador)
+        handleClickJugador2()
+    }
+
+    const handleClickJugador2  = () => {
+        const aleatorio = Math.round(Math.random()*4);
+        const jugada2 = opciones[aleatorio];
+        console.log('eleccion maquina', jugada2)
+        setOpcionJugador2(jugada2)
+        console.log('jugador maquina', opcionJugador2)
+    }
+
+    const jugar = () => {
+        
+        if(opcionJugador.eleccion === opcionJugador2.eleccion){
+            setGanador('EMPATE')
+        } else {
+            if (opcionJugador.vence.includes(opcionJugador2.eleccion)){
+                setGanador(nombre)
+            } else {
+                setGanador('MAQUINA')
+            }
+        }
+        console.log(ganador)
+
+        setOpcionJugador('')
+        setOpcionJugador2('')
+    }
 
     return (
-        <div className="alineacion"> 
-            <button value='piedra' className="jugada margin-top-md alineacion">
-                <img className= 'img-size' src="/piedra.png"/>
-            </button>
-            <button value='papel' className="jugada margin-top-md alineacion">
-                <img className= 'img-size' src="/papel.jpg"/>
-            </button>
-            <button value='tijera' className="jugada margin-top-md alineacion">
-                <img className= 'img-size' src="/tijera.jpg"/>
-            </button>
-            <button value='lagarto' className="jugada margin-top-md alineacion">
-                <img className= 'img-size' src="/lagarto.jpg"/>
-            </button>
-            <button value='spock' className="jugada margin-top-md alineacion">
-                <img className= 'img-size' src="/spock.jpg"/>
-            </button>
+        <div>
+            <div className="alineacion">
+                {opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugador} />)}
+            </div>
+            <div className="alineacion">
+                <button onClick={jugar} className="">Jugar</button>
+            </div>
+            <div>
+                {ganador}
+            </div>
         </div>
     );
 }
