@@ -8,44 +8,36 @@ import './App.css';
 const Home = () => {
     const history = useHistory();
 
-    const [isMachine, setIsMachine] = useState('');
+    const [playMachine, setPlayMachine] = useState('');
 
-    const [players, setPlayers] = useState('');
+    const [namePlayerOne, setNamePlayerOne] = useState('');
+    const [namePlayerTwo, setNamePlayerTwo] = useState('Machine');
 
-    const [name1, setName1] = useState('');
-    const [name2, setName2] = useState('');
-
-    const changeName = (event) => {
-        setName1(event.target.value)
+    const changeNameOne = (event) => {
+        setNamePlayerOne(event.target.value)
         console.log(event.target.value)
     }
 
-    const changeName2 = (event) => {
-        setName2(event.target.value)
+    const changeNameTwo = (event) => {
+        setNamePlayerTwo(event.target.value)
         console.log(event.target.value)
     }
 
     const handleClickPlayer = (event) => {
         event.preventDefault();
-        setPlayers('1');
-        setIsMachine(true);
-        console.log(players);
+        setPlayMachine(true);
+        localStorage.setItem('playAgainstMachine', playplayMachine)
     }
 
     const handleClickPlayers = (event) => {
         event.preventDefault();
-        setPlayers('2')
-        setIsMachine(false);
-        console.log(players);
+        setPlayMachine(false);
+        localStorage.setItem('playAgainstMachine', playplayMachine)
     }
 
     const playGame = () => {
-        if(players=='1'){
-            localStorage.setItem('jugador1', JSON.stringify({nombre:name1, victorias:''}))
-        } else {
-            localStorage.setItem('jugador1', JSON.stringify({nombre:name1, victorias:''}))
-            localStorage.setItem('jugador2', JSON.stringify({nombre:name2, victorias:''}))
-        }
+        localStorage.setItem('playerOne', JSON.stringify({name:namePlayerOne, victories:''}))
+        localStorage.setItem('playerTwo', JSON.stringify({name:namePlayerTwo, victories:''}))
         history.push(`/jugar`);
     }
 
@@ -61,11 +53,10 @@ const Home = () => {
             <button onClick={handleClickPlayers} className="image-button margin-top-md">
                 <img src="/player2.jpg" className="player"/>
             </button>
-            <a> Se seleccionó {players} jugador/es </a>
         </div>
         <div>
-            <input value={name1} onChange={changeName} className="form-control mb-2" placeholder="Ingrese su nombre" />
-            <input value={name2} disabled={isMachine} onChange={changeName2} className="form-control mb-2" placeholder="Ingrese su nombre" />
+            <input value={namePlayerOne} onChange={changeNameOne} className="form-control mb-2" placeholder="Ingrese su nombre" />
+            <input value={namePlayerTwo} disabled={playMachine} onChange={changeNameTwo} className="form-control mb-2" placeholder="Ingrese su nombre" />
         </div>
             <button type="button" onClick={playGame}>Jugar</button>
         </form>

@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Opcion from './Opcion.jsx'
 
 const Opciones = () => {
-
-    const jugador1 = localStorage.getItem('jugador1');
-    const nombre = JSON.parse(jugador1).nombre
-
-    const [opcionJugador, setOpcionJugador] = useState(''); 
-    const [opcionJugador2, setOpcionJugador2] = useState('');
-    const [ganador, setGanador] = useState('');
 
     const opciones = [
         {eleccion: 'piedra', vence:['lagarto', 'tijera'], imagen:'/piedra.png'},
@@ -18,51 +11,105 @@ const Opciones = () => {
         {eleccion: 'spock', vence: ['piedra', 'tijera'], imagen:'/spock.jpg'}
     ];
 
-    const handleClickJugador = (eleccion) => {
+    const playerOne = localStorage.getItem('playerOne');
+    const nameOne = JSON.parse(playerOne).name
+
+    const playerTwo = localStorage.getItem('playerTwo');
+    const nameTwo = JSON.parse(playerTwo).name
+
+    const [advertencia, setAdvertencia] = useState(''); 
+
+    const [opcionJugador, setOpcionJugador] = useState(''); 
+    const [opcionJugador2, setOpcionJugador2] = useState('');
+    const [ganador, setGanador] = useState('');
+
+   /* useEffect(() => {
+        
+        
+    }, [opcionJugador]);*/
+
+    const handleClickJugadorYMaquina = (eleccion) => {
         setGanador('')
-        console.log('eleccion jugador1', eleccion)
         setOpcionJugador(eleccion)
-        console.log('jugador1', opcionJugador)
-        handleClickJugador2()
+
+        handleClickMaquina()
     }
 
-    const handleClickJugador2  = () => {
+    const handleClickMaquina  = () => {
         const aleatorio = Math.round(Math.random()*4);
         const jugada2 = opciones[aleatorio];
-        console.log('eleccion maquina', jugada2)
         setOpcionJugador2(jugada2)
-        console.log('jugador maquina', opcionJugador2)
     }
 
-    const jugar = () => {
+    const handleClickJugador = (eleccion) => {
+        setGanador('')
+        setOpcionJugador(eleccion)
         
+    }
+
+    const handleClickJugador2 = (eleccion) => {
+        setGanador('')
+        setOpcionJugador2(eleccion) 
+    }
+
+    const jugar= () => {
+    setAdvertencia('Turno del jugador 2')
+    }
+
+    const jugarMaquina = () => {
+        console.log('1', opcionJugador)
+        console.log('maquina', opcionJugador2)
+       
         if(opcionJugador.eleccion === opcionJugador2.eleccion){
             setGanador('EMPATE')
         } else {
             if (opcionJugador.vence.includes(opcionJugador2.eleccion)){
-                setGanador(nombre)
+                setGanador(nameOne)
             } else {
-                setGanador('MAQUINA')
+                setGanador(nameTwo)
             }
         }
-        console.log(ganador)
 
+        console.log(ganador)
         setOpcionJugador('')
         setOpcionJugador2('')
     }
 
     return (
         <div>
-            <div className="alineacion">
-                {opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugador} />)}
-            </div>
-            <div className="alineacion">
-                <button onClick={jugar} className="">Jugar</button>
-            </div>
-            <div>
-                {ganador}
-            </div>
+                {(localStorage.getItem('playAgainstMachine')) ? 
+                <div>
+                    <div className="alineacion">
+                        {opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugadorYMaquina} />)}
+                    </div>
+                    <div className="alineacion">
+                        <button onClick={jugarMaquina} className="">Jugar</button>
+                    </div>
+                </div>
+
+                : 
+                <div>
+                    <div className="alineacion">
+                        {opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugador} />)}
+                    </div>
+                    <div className="alineacion">
+                        <button onClick={jugar} className="">Jugar</button>
+                    </div>
+                    <div>{advertencia}</div>
+                    <div className="alineacion">
+                        {opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugador2} />)}
+                    </div>
+                    <div className="alineacion">
+                        <button onClick={jugarMaquina} className="">Jugar</button>
+                    </div> 
+
+                </div> }
+                <div> 
+
+                    {ganador}
+                </div>
         </div>
+
     );
 }
 
