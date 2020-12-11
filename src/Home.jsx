@@ -24,17 +24,16 @@ const Home = () => {
         event.preventDefault();
         setNamePlayerTwo('Machine');
         setPlayMachine(true);
-        localStorage.setItem('playAgainstMachine', true)
+        localStorage.setItem('playAgainstMachine', playMachine)
     }
 
     const handleClickPlayers = (event) => {
         event.preventDefault();
         setPlayMachine(false);
-        localStorage.setItem('playAgainstMachine', false)
+        localStorage.setItem('playAgainstMachine', playMachine)
     }
 
     const playGame = () => {
-        localStorage.setItem('playAgainstMachine', playMachine)
         localStorage.setItem('playerOne', JSON.stringify({ name: namePlayerOne, victories: '' }))
         localStorage.setItem('playerTwo', JSON.stringify({ name: namePlayerTwo, victories: '' }))
         history.push(`/jugar`);
@@ -44,7 +43,7 @@ const Home = () => {
         <div>
             <Header />
             <form className='form-center'>
-                <div class="card-body">
+                <div className="card-body">
                     <div className='container wrapper'>
                         <div className='row'>
                             <div>

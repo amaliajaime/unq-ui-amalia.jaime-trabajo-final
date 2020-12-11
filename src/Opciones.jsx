@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Opcion from './Opcion.jsx'
-import UnJugador from './UnJugador.jsx'
+import Jugador from './Jugador.jsx'
 import './App.css';
 
 const Opciones = () => {
@@ -89,12 +89,12 @@ const Opciones = () => {
     return (
         <div>
             <div> {playAgainstMachine ?
-                <UnJugador opciones={opciones} handleClickJugador={handleClickJugadorYMaquina} jugar={jugar} />
+                <Jugador opciones={opciones} handleClickJugador={handleClickJugadorYMaquina} jugar={jugar} />
             :
                 <div>
-                    <UnJugador opciones={opciones} handleClickJugador={handleClickJugador} jugar={jugarAviso} />
+                    <Jugador opciones={opciones} handleClickJugador={handleClickJugador} jugar={jugarAviso} />
                     <div>{aviso}</div>
-                    <UnJugador opciones={opciones} handleClickJugador={handleClickJugador2} jugar={jugar} />
+                    <Jugador opciones={opciones} handleClickJugador={handleClickJugador2} jugar={jugar} />
                 </div> }
             </div>
 
