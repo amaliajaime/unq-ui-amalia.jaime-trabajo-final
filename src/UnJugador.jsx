@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
+import Opcion from './Opcion.jsx'
+import './App.css';
 
-const UnJugador = () => {
+const UnJugador = (props) => {
 
-    const [player1, setPlayer1] = useState('');
-    
-    const changeName = (event) => {
-        setPlayer1(event.target.value)
-        console.log(event.target.value)
+    const handleClickJugador = (eleccion) => {
+        props.handleClickJugador(eleccion)
+        console.log(eleccion)
+    } 
+
+    const jugar=() => {
+        props.jugar()
     }
 
-    return(
+    return (
         <div>
-            <input value={player1} onChange={changeName} className="form-control mb-2" placeholder="Player 1" />
+            <div className="alineacion">
+                {props.opciones.map((opcion) => <Opcion key={opcion.eleccion} imagen={opcion.imagen} seleccionado={opcion} handleClickJugador={handleClickJugador} />)}
+            </div>
+            <div className="alineacion">
+                <button className='button-style' onClick={jugar}>Jugar</button>
+            </div>
         </div>
     )
 }

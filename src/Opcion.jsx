@@ -8,7 +8,7 @@ const Opcion = (props) => {
     }
 
     return(
-        <button onClick={()=> handleClick(props.seleccionado)} className="jugada margin-top-md alineacion">
+        <button onClick={()=> handleClick(props.seleccionado)} className="jugada margin-options alineacion">
             <img className= 'img-size' src={props.imagen}/>
         </button>
     )

@@ -1,11 +1,24 @@
+import { useHistory } from 'react-router-dom';
+import './App.css';
+
 const Header = () => {
+    const history = useHistory();
 
-    return(
+    const handleClick = () => {
+        history.push(`/home`);
+        window.location.reload();
+    };
 
-        <h1>Piedra, Papel, Tijera, Lagarto o Spock</h1>
+    return (
+        <div className='row'>
+            <div className='row'>
+                <button onClick={handleClick} type="button" className="jugada margin-options alineacion">
+                    <img src="/image.png" className="sacar-borde" />
+                </button>
+            </div>
+        </div>
 
     );
-    
 }
 
 export default Header;

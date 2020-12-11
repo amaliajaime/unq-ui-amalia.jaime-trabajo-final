@@ -3,7 +3,6 @@ import './App.css';
 import Header from './Header.jsx';
 import Opciones from './Opciones.jsx';
 
-
 const Jugar = (props) => {
     
     const playerOne = localStorage.getItem('playerOne');

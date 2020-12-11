@@ -29,7 +29,6 @@
   height:15px;
   background: transparent;
   border:10px;
-  
 }
 
 .jugada{
@@ -41,7 +40,6 @@
 } 
 
 .img-size{
-  border: none; 
   width: 50px;
   height: 50px;
   border-radius:30px;
@@ -53,11 +51,64 @@
 }
 
 .img-header{
-  border: none; 
-  width: 80px;
-  height: 80px;
-
-  border: none; /* Remove borders */
+  width: 50px;
+  height: 50px;
+  border-radius:30px;
   background-color: white;
-  width: 33%;
+  border: none;
 }
+
+.alinear{
+  margin: 10px 10px;
+}
+
+.margin-options {
+  margin: 10px;
+  margin-top: 10px;
+}
+
+.sacar-borde{
+  height: 50px;
+  width: 50px;
+  /* los siguientes valores son independientes del tamaño del círculo */
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  background-size: 100% auto;
+}
+
+.title-image{
+  height: 50px;
+  width: 50px;
+  border: none; 
+}
+
+.margin-top{
+  margin-top: 2rem;
+}
+
+.margin{
+  margin-left: 70px;
+}
+
+.input-options{
+  width: 20%;
+  border: 2px solid  #bce9e8;
+  border-radius: 4px;
+}
+
+.button-style{
+  align-items: auto;
+  background-color: #0AB4B1;
+  border: none;
+  color: white;
+  padding: 3px 20px;
+  text-decoration: none;
+  margin: 9px 9px;
+  cursor: pointer;
+}
+
+.form-center{
+ 
+}
+
