@@ -10,12 +10,10 @@ const Header = () => {
     };
 
     return (
-        <div className='row'>
-            <div className='row'>
-                <button onClick={handleClick} type="button" className="jugada margin-options alineacion">
-                    <img src="/image.png" className="sacar-borde" />
-                </button>
-            </div>
+        <div className="navbar navbar-light color-back">
+            <button onClick={handleClick} type="button" className="jugada margin-options alineacion">
+                <img src="/image.png" className="sacar-borde" />
+            </button>
         </div>
 
     );

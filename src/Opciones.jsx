@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Opcion from './Opcion.jsx'
 import Jugador from './Jugador.jsx'
+import Resultado from './Resultado.jsx'
 import './App.css';
 
 const Opciones = () => {
 
     const [playAgainstMachine, setPlayAgainstMachine] = useState('');
 
-    useEffect(() => {
-        setPlayAgainstMachine(localStorage.getItem('playAgainstMachine'))
-    }, [playAgainstMachine]);
-
     const opciones = [
-        { eleccion: 'piedra', vence: ['lagarto', 'tijera'], imagen: '/piedra.png' },
-        { eleccion: 'papel', vence: ['piedra', 'spock'], imagen: '/papel.jpg' },
-        { eleccion: 'tijera', vence: ['papel', 'lagarto'], imagen: '/tijera.jpg' },
-        { eleccion: 'lagarto', vence: ['spock', 'papel'], imagen: '/lagarto.jpg' },
-        { eleccion: 'spock', vence: ['piedra', 'tijera'], imagen: '/spock.jpg' }
+        { eleccion: 'Piedra', vence: ['lagarto', 'tijera'], imagen: '/piedra.png' },
+        { eleccion: 'Papel', vence: ['piedra', 'spock'], imagen: '/papel.jpg' },
+        { eleccion: 'Tijera', vence: ['papel', 'lagarto'], imagen: '/tijera.jpg' },
+        { eleccion: 'Lagarto', vence: ['spock', 'papel'], imagen: '/lagarto.jpg' },
+        { eleccion: 'Spock', vence: ['piedra', 'tijera'], imagen: '/spock.jpg' }
     ];
 
     const playerOne = localStorage.getItem('playerOne');
     const nameOne = JSON.parse(playerOne).name;
     const [victoriesOne, setVictoriesOne] = useState(0);
+    const [selectOne, setSelectOne] = useState('');
 
     const playerTwo = localStorage.getItem('playerTwo');
     const nameTwo = JSON.parse(playerTwo).name;
     const [victoriesTwo, setVictoriesTwo] = useState(0);
+    const [selectTwo, setSelectTwo] = useState('');
 
     const [aviso, setAviso] = useState('');
 
@@ -41,8 +40,8 @@ const Opciones = () => {
 
     const handleClickMaquina = () => {
         const aleatorio = Math.round(Math.random() * 4);
-        const jugada2 = opciones[aleatorio];
-        setOpcionJugador2(jugada2)
+        const eleccion = opciones[aleatorio];
+        setOpcionJugador2(eleccion)
     }
 
     const handleClickJugador = (eleccion) => {
@@ -51,65 +50,68 @@ const Opciones = () => {
     }
 
     const handleClickJugador2 = (eleccion) => {
-        setGanador('')
         setOpcionJugador2(eleccion)
     }
 
     const jugarAviso = () => {
-        setAviso('Turno del jugador ' + nameTwo)
+        if (opcionJugador.eleccion) {
+            setAviso('Turno del jugador ' + nameTwo)
+        } else {
+            setAviso('Seleccione su jugada')
+        }
     }
 
     const jugar = () => {
         setAviso('')
-
-        if (opcionJugador.eleccion === opcionJugador2.eleccion) {
-            setGanador('GANADOR : EMPATE')
-        } else {
-            if (opcionJugador.vence.includes(opcionJugador2.eleccion)) {
-                setVictoriesOne(victoriesOne + 1);
-                setGanador('GANADOR: ' + nameOne)
-                localStorage.setItem('playerOne', JSON.stringify({ name: nameOne, victories: victoriesOne }));
-
+        if (opcionJugador.eleccion && opcionJugador2.eleccion) {
+            if (opcionJugador.eleccion === opcionJugador2.eleccion) {
+                setGanador('GANADOR : EMPATE')
             } else {
-                setVictoriesTwo(victoriesTwo + 1);
-                setGanador('GANADOR: ' + nameTwo)
-                localStorage.setItem('playerTwo', JSON.stringify({ name: nameTwo, victories: victoriesTwo }));
+                if (opcionJugador.vence.includes(opcionJugador2.eleccion)) {
+                    setGanador('GANADOR: ' + nameOne)
+                    setVictoriesOne(victoriesOne + 1);
+                    localStorage.setItem('playerOne', JSON.stringify({ name: nameOne, victories: victoriesOne }));
+
+                } else {
+                    setGanador('GANADOR: ' + nameTwo)
+                    setVictoriesTwo(victoriesTwo + 1);
+                    localStorage.setItem('playerTwo', JSON.stringify({ name: nameTwo, victories: victoriesTwo }));
+                }
             }
+            setSelectOne(opcionJugador.eleccion)
+            setSelectTwo(opcionJugador2.eleccion)
+            setOpcionJugador('')
+            setOpcionJugador2('')
+        } else {
+                setAviso('Seleccione su jugada')
         }
-        setOpcionJugador('')
-        setOpcionJugador2('')
     }
 
     const reiniciarJuego = () => {
         setVictoriesOne(0)
         setVictoriesTwo(0)
         setGanador('')
+
+        setSelectOne('')
+        setSelectTwo('')
     }
 
     return (
-        <div>
-            <div> {playAgainstMachine ?
-                <Jugador opciones={opciones} handleClickJugador={handleClickJugadorYMaquina} jugar={jugar} />
-            :
+        <div className='container centrar'>
+            <div> { !localStorage.getItem('playAwainstMachine') ?
+                <div>
+                    <Jugador opciones={opciones} handleClickJugador={handleClickJugadorYMaquina} jugar={jugar} />
+                    <div className='error'>{aviso}</div>
+                </div>
+                :
                 <div>
                     <Jugador opciones={opciones} handleClickJugador={handleClickJugador} jugar={jugarAviso} />
-                    <div>{aviso}</div>
+                    <div className='error'>{aviso}</div>
                     <Jugador opciones={opciones} handleClickJugador={handleClickJugador2} jugar={jugar} />
-                </div> }
+                </div>}
             </div>
-
-            <div>
-                {ganador}
-            </div>
-            <div>
-                VICTORIAS {nameOne}:  {victoriesOne}
-            </div>
-            <div>
-                VICTORIAS {nameTwo}: {victoriesTwo}
-            </div>
-            <div className="alineacion">
-                <button className='button-style' onClick={reiniciarJuego}>Reiniciar</button>
-            </div>
+            <Resultado reiniciarJuego={reiniciarJuego} ganador={ganador} nameOne={nameOne} nameTwo={nameTwo}
+                selectOne={selectOne} selectTwo={selectTwo} victoriesOne={victoriesOne} victoriesTwo={victoriesTwo} />
         </div>
     );
 }

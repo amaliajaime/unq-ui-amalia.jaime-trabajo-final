@@ -4,19 +4,20 @@ import Header from './Header.jsx';
 import Opciones from './Opciones.jsx';
 
 const Jugar = (props) => {
-    
+
     const playerOne = localStorage.getItem('playerOne');
     const nameOne = JSON.parse(playerOne).name
 
     const playerTwo = localStorage.getItem('playerTwo');
     const nameTwo = JSON.parse(playerTwo).name
 
-    return(
+    return (
         <div>
-            <Header/>
-            <a> {nameOne} VS {nameTwo} </a>
-            <h4>Elegí tu tiro </h4>
-            <Opciones/>
+            <Header />
+            <div className='container'>
+                <a className='main-title'> {nameOne} VS {nameTwo} </a>
+                <Opciones />
+            </div>
         </div>
     )
 }

@@ -70,7 +70,6 @@
 .sacar-borde{
   height: 50px;
   width: 50px;
-  /* los siguientes valores son independientes del tamaño del círculo */
   background-repeat: no-repeat;
   background-position: 50%;
   border-radius: 50%;
@@ -108,7 +107,38 @@
   cursor: pointer;
 }
 
-.form-center{
- 
+.error{
+  color: red;
+  text-align: center;
+  font-size: 13px;
 }
 
+.centrar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-title{
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 30px;
+  letter-spacing: 20px;
+  font-weight: lighter;
+  padding: 10px 40px;
+  text-align: center;
+}
+
+.result{
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 10px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.reiniciar-partida{
+  margin: 10px 10px ;
+}
+
+.color-back{
+  background-image: url(.public/image3.jpg);
+}
