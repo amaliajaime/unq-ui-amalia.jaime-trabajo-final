@@ -11,7 +11,7 @@ const Header = () => {
 
     return (
         <div className="navbar navbar-light color-back">
-            <button onClick={handleClick} type="button" className="jugada margin-options alineacion">
+            <button onClick={handleClick} type="button" className="button-header margin-options alineacion">
                 <img src="/image.png" className="sacar-borde" />
             </button>
         </div>

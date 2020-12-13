@@ -3,32 +3,32 @@ import { useHistory } from 'react-router-dom';
 import Header from './Header.jsx';
 import './App.css';
 
-const Resultado = (props) => {
+const Result = (props) => {
 
-    const reiniciarJuego = () => {
-        props.reiniciarJuego()
+    const restartGame = () => {
+        props.restartGame()
     }
 
     return (
         <div className='result'>
-            <div> {props.ganador} </div>
-            <div>
+            <div> {props.winner} </div>
+            <div class='border-result'> 
                 Victorias {props.nameOne}:  {props.victoriesOne}
             </div>
             <div>
                 Elección {props.nameOne}: {props.selectOne}
             </div>
-            <div>
+            <div class='border-result'>
                 Victorias {props.nameTwo}: {props.victoriesTwo}
             </div>
             <div>
                 Elección {props.nameTwo}: {props.selectTwo}
             </div>
             <div className="reiniciar-partida">
-                <button className='button-style' onClick={reiniciarJuego}>Reiniciar</button>
+                <button className='button-style' onClick={restartGame}>Reiniciar</button>
             </div>
         </div>
-    );
+    );    
 }
 
-export default Resultado;
+export default Result;

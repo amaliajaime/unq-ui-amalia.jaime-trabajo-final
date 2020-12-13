@@ -22,21 +22,19 @@ const Home = () => {
     const handleClickPlayer = (event) => {
         event.preventDefault();
         setPlayMachine(true);
-        localStorage.setItem('playAwainstMachine', true)
+        localStorage.setItem('playAgainstMachine', true)
         setNamePlayerTwo('Machine');
     }
 
     const handleClickPlayers = (event) => {
         event.preventDefault();
         setPlayMachine(false);
-        localStorage.setItem('playAwainstMachine', false)
-        //localStorage.setItem('playAwainstMachine', false)
+        localStorage.setItem('playAgainstMachine', false)
     }
 
     const playGame = () => {
         if (namePlayerOne.length > 0 && namePlayerTwo.length > 0) {
-            console.log(playMachine)
-            console.log(localStorage.getItem('playAwainstMachine'))
+
             localStorage.setItem('playerOne', JSON.stringify({ name: namePlayerOne, victories: '' }))
             localStorage.setItem('playerTwo', JSON.stringify({ name: namePlayerTwo, victories: '' }))
             history.push(`/jugar`);
@@ -52,7 +50,7 @@ const Home = () => {
                 <div className="card-body">
                     <div className='container wrapper'>
                         <div className='row'>
-                            <div>
+                            <div className='input-font'>
                                 <button type="button" className="btn btn-dark" onClick={handleClickPlayer}>
                                     <img src="/player1.jpg" className="player" />
                                 </button>
@@ -63,7 +61,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='container wrapper'>
-                        <div className='row'>
+                        <div className='row input-font'>
                             <input value={namePlayerOne} onChange={changeNameOne} className="input-options" placeholder="Ingrese su nombre" />
                             <input value={namePlayerTwo} disabled={playMachine} onChange={changeNameTwo} className="input-options" placeholder="Ingrese su nombre" />
                             <button className='button-style' type="button" onClick={playGame}>Jugar</button>

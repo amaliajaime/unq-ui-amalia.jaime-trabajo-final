@@ -37,6 +37,15 @@
   background-color: white;
   border-radius:30px;
   border: none; 
+}
+
+.button-header{
+  width: 50px;
+  height: 50px;
+  padding: 0px 0px;
+  background-color: white;
+  border-radius:30px;
+  border: none; 
 } 
 
 .img-size{
@@ -97,6 +106,8 @@
 }
 
 .button-style{
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 10px;
   align-items: auto;
   background-color: #0AB4B1;
   border: none;
@@ -140,5 +151,16 @@
 }
 
 .color-back{
-  background-image: url(.public/image3.jpg);
+  background-image: url(images/image3.jpg);
+}
+
+.input-font{
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 10px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.border-result{
+  margin-top: 10px;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Header from './Header.jsx';
-import Opciones from './Opciones.jsx';
+import Options from './Options.jsx';
 
-const Jugar = (props) => {
+const Play = (props) => {
 
     const playerOne = localStorage.getItem('playerOne');
     const nameOne = JSON.parse(playerOne).name
@@ -16,10 +16,10 @@ const Jugar = (props) => {
             <Header />
             <div className='container'>
                 <a className='main-title'> {nameOne} VS {nameTwo} </a>
-                <Opciones />
+                <Options playAgainstMachine={localStorage.getItem('playAgainstMachine')} />
             </div>
         </div>
     )
 }
 
-export default Jugar;
+export default Play;
