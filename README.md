@@ -1,7 +1,7 @@
-# Cómo descargar y correr la app
+# Interfaces de usuario - 2do Cuatrimeste 2020
 
 
-## Available Scripts
+## git clone 
 
 In the project directory, you can run:
 
