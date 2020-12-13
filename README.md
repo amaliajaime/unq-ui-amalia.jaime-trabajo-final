@@ -1,6 +1,6 @@
 # Interfaces de usuario - 2do Cuatrimeste 2020
 
-En el extremo superior derecho ir a 'Clone' y copiar el link.
+En el extremo superior derecho ir a 'Code' y copiar el link.
 Abrir una terminal de Windows o Git en la carpeta a copiar el proyecto 
 
 ## git clone 
